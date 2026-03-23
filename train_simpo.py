@@ -129,18 +129,22 @@ def load_simpo_dataset(config: SimPOConfig, tokenizer) -> Dataset:
 
     def extract_prompt_and_responses(example):
         """Extract prompt, chosen, rejected from various dataset formats."""
-        # UltraFeedback format
+        # UltraFeedback format (argilla version)
+        if "instruction" in example and "chosen_response" in example:
+            return {
+                "prompt": str(example["instruction"]),
+                "chosen": str(example["chosen_response"]),
+                "rejected": str(example["rejected_response"]),
+            }
+
+        # Messages format (chosen/rejected as list of dicts)
         if "chosen" in example and "rejected" in example:
             chosen = example["chosen"]
             rejected = example["rejected"]
 
-            # Messages format (list of dicts)
             if isinstance(chosen, list):
-                # Find the common prompt (everything before the assistant turn)
                 chosen_text = format_conversation(chosen)
                 rejected_text = format_conversation(rejected)
-
-                # Extract prompt: everything before the last Assistant: turn
                 if "Human:" in chosen_text:
                     prompt = chosen_text.rsplit("Assistant:", 1)[0] + "Assistant: "
                     chosen_resp = chosen_text.rsplit("Assistant:", 1)[1].strip()
@@ -149,14 +153,12 @@ def load_simpo_dataset(config: SimPOConfig, tokenizer) -> Dataset:
                     prompt = ""
                     chosen_resp = chosen_text
                     rejected_resp = rejected_text
-
                 return {
                     "prompt": prompt.strip(),
                     "chosen": chosen_resp.strip(),
                     "rejected": rejected_resp.strip(),
                 }
 
-            # String format
             elif isinstance(chosen, str):
                 return {
                     "prompt": example.get("prompt", ""),
@@ -166,9 +168,16 @@ def load_simpo_dataset(config: SimPOConfig, tokenizer) -> Dataset:
 
         # Fallback
         return {
-            "prompt": example.get("prompt", example.get("question", "")),
-            "chosen": example.get("chosen", example.get("preferred", "")),
-            "rejected": example.get("rejected", example.get("dispreferred", "")),
+            "prompt": example.get(
+                "prompt", example.get("question", example.get("instruction", ""))
+            ),
+            "chosen": example.get(
+                "chosen", example.get("preferred", example.get("chosen_response", ""))
+            ),
+            "rejected": example.get(
+                "rejected",
+                example.get("dispreferred", example.get("rejected_response", "")),
+            ),
         }
 
     processed = ds.map(extract_prompt_and_responses, remove_columns=ds.column_names)
@@ -422,11 +431,14 @@ def main():
 
     # Load model
     print(f"Loading model: {config.model}")
+    use_cpu = not torch.cuda.is_available()
     model_kwargs = {
-        "torch_dtype": torch.bfloat16 if config.bf16 else torch.float32,
-        "device_map": "auto",
+        "dtype": torch.float32
+        if use_cpu
+        else (torch.bfloat16 if config.bf16 else torch.float32),
+        "device_map": "cpu" if use_cpu else "auto",
     }
-    if config.use_flash_attention:
+    if config.use_flash_attention and not use_cpu:
         model_kwargs["attn_implementation"] = "flash_attention_2"
 
     model = AutoModelForCausalLM.from_pretrained(config.model, **model_kwargs)
@@ -469,6 +481,7 @@ def main():
     print(f"Training on {len(tokenized)} preference pairs")
 
     # Training arguments — use max_steps=1M (we stop by time, not steps)
+    use_cpu = not torch.cuda.is_available()
     training_args = TrainingArguments(
         output_dir=config.output_dir,
         max_steps=1_000_000,  # We stop via TimeStoppingCallback
@@ -479,7 +492,8 @@ def main():
         logging_steps=config.logging_steps,
         save_steps=config.save_steps,
         save_strategy="steps",
-        bf16=config.bf16,
+        bf16=config.bf16 and not use_cpu,
+        use_cpu=use_cpu,
         report_to="wandb" if config.wandb_project else "none",
         remove_unused_columns=False,
         dataloader_pin_memory=False,
