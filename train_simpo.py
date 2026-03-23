@@ -26,6 +26,7 @@ Usage:
 import os
 import json
 import math
+import time
 import torch
 import torch.nn.functional as F
 from dataclasses import dataclass, field
@@ -36,6 +37,7 @@ from transformers import (
     HfArgumentParser,
     TrainingArguments,
     Trainer,
+    TrainerCallback,
 )
 from datasets import load_dataset, Dataset
 from peft import LoraConfig, get_peft_model, TaskType
@@ -62,6 +64,9 @@ class SimPOConfig:
     beta: float = field(default=0.01, metadata={"help": "Temperature for sigmoid"})
 
     # Training
+    training_hours: float = field(
+        default=5.0, metadata={"help": "Max training time in hours (overrides epochs)"}
+    )
     epochs: int = field(default=3)
     batch_size: int = field(default=4)
     gradient_accumulation_steps: int = field(default=8)
@@ -354,6 +359,39 @@ class SimPODataCollator:
         return torch.tensor(padded, dtype=torch.long)
 
 
+# ==================== Time Stopping Callback ====================
+
+
+class TimeStoppingCallback(TrainerCallback):
+    """Stop training after a specified duration."""
+
+    def __init__(self, max_hours: float = 5.0):
+        self.max_seconds = max_hours * 3600
+        self.start_time = None
+
+    def on_train_begin(self, args, state, control, **kwargs):
+        self.start_time = time.time()
+        hours = self.max_seconds / 3600
+        print(f"Time limit: {hours:.1f} hours ({self.max_seconds:.0f}s)")
+
+    def on_step_end(self, args, state, control, **kwargs):
+        if self.start_time is None:
+            return
+        elapsed = time.time() - self.start_time
+        remaining = self.max_seconds - elapsed
+
+        if remaining <= 0:
+            control.should_training_stop = True
+            hours = elapsed / 3600
+            print(f"\nTime limit reached: {hours:.2f}h elapsed. Stopping.")
+        elif state.global_step % 50 == 0:
+            rem_hours = remaining / 3600
+            elapsed_hours = elapsed / 3600
+            print(f"  Time: {elapsed_hours:.1f}h elapsed, {rem_hours:.1f}h remaining")
+
+        return control
+
+
 # ==================== Main ====================
 
 
@@ -430,17 +468,17 @@ def main():
 
     print(f"Training on {len(tokenized)} preference pairs")
 
-    # Training arguments
+    # Training arguments — use max_steps=1M (we stop by time, not steps)
     training_args = TrainingArguments(
         output_dir=config.output_dir,
-        num_train_epochs=config.epochs,
+        max_steps=1_000_000,  # We stop via TimeStoppingCallback
         per_device_train_batch_size=config.batch_size,
         gradient_accumulation_steps=config.gradient_accumulation_steps,
         learning_rate=config.learning_rate,
         warmup_ratio=config.warmup_ratio,
         logging_steps=config.logging_steps,
         save_steps=config.save_steps,
-        save_strategy="epoch",
+        save_strategy="steps",
         bf16=config.bf16,
         report_to="wandb" if config.wandb_project else "none",
         remove_unused_columns=False,
@@ -453,6 +491,9 @@ def main():
     # Data collator
     data_collator = SimPODataCollator(tokenizer, config.max_seq_length)
 
+    # Time-based stopping callback
+    time_callback = TimeStoppingCallback(max_hours=config.training_hours)
+
     # Create trainer
     trainer = SimPOTrainer(
         gamma=config.gamma,
@@ -461,10 +502,11 @@ def main():
         args=training_args,
         train_dataset=tokenized,
         data_collator=data_collator,
+        callbacks=[time_callback],
     )
 
     # Train
-    print("Starting SimPO training...")
+    print(f"Starting SimPO training for {config.training_hours}h...")
     trainer.train()
 
     # Save

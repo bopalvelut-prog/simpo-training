@@ -27,11 +27,12 @@ for size in "${MODEL_SIZES[@]}"; do
         --model_size "$size" \
         --gamma 1.0 \
         --beta 0.01 \
-        --epochs 3 \
+        --training_hours 5.0 \
         --batch_size 4 \
         --gradient_accumulation_steps 8 \
         --learning_rate 5e-7 \
         --max_seq_length 2048 \
+        --save_steps 200 \
         $use_lora \
         --wandb_project "simpo-qwen2.5"
 
