@@ -1,0 +1,10 @@
+torch>=2.1.0
+transformers>=4.38.0
+datasets>=2.18.0
+peft>=0.10.0
+accelerate>=0.29.0
+bitsandbytes>=0.42.0
+safetensors>=0.4.0
+sentencepiece>=0.2.0
+protobuf
+wandb
