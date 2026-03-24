@@ -2,3 +2,4 @@ simpo-test/
 __pycache__/
 *.pyc
 .DS_Store
+simpo-50m/
