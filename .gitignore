@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .DS_Store
 simpo-50m/
+simpo-95m/
