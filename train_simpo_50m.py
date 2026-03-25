@@ -267,12 +267,21 @@ def simpo_loss(log_probs_chosen, log_probs_rejected, prompt_lens, gamma=1.0, bet
 
 def train_simpo_50m():
     """Train 50M model with SimPO for 5 hours."""
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--pretrained", type=str, default=None, help="Load pretrained checkpoint"
+    )
+    parser.add_argument("--hours", type=float, default=5.0)
+    args, _ = parser.parse_known_args()
+
     print("=" * 60)
     print("SimPO Training — 50M Parameter Model")
     print("=" * 60)
 
     # Config
-    training_hours = 5.0
+    training_hours = args.hours
     gamma = 1.0
     beta = 0.5
     lr = 3e-4
@@ -286,6 +295,8 @@ def train_simpo_50m():
     print(f"  Training time: {training_hours}h")
     print(f"  gamma={gamma}, beta={beta}, lr={lr}")
     print(f"  batch_size={batch_size}, max_len={max_len}")
+    if args.pretrained:
+        print(f"  Pretrained: {args.pretrained}")
 
     # Build tokenizer
     print("\nBuilding tokenizer...")
@@ -316,6 +327,15 @@ def train_simpo_50m():
     # Model
     print("\nBuilding 50M model...")
     model = GPT50M(config)
+
+    # Load pretrained weights if provided
+    if args.pretrained:
+        print(f"Loading pretrained weights from {args.pretrained}")
+        ckpt = torch.load(args.pretrained, map_location="cpu", weights_only=False)
+        model.load_state_dict(ckpt["model"], strict=True)
+        pretrained_loss = ckpt.get("loss", "?")
+        print(f"  Loaded (pretrain loss: {pretrained_loss})")
+
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.01)
 
     # Training loop

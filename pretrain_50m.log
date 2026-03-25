@@ -1,0 +1,114 @@
+============================================================
+Pretraining 50M GPT (Next-Token Prediction)
+============================================================
+  Time: 5.0h | LR: 0.001 | Batch: 4
+
+Building tokenizer...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  Vocab: 16384 words
+Loading text for pretraining...
+Loaded 50000 text sequences
+
+Building 50M model...
+Model: 51,380,224 params (51.4M)
+
+Starting pretraining for 5.0h...
+
+  Step 10 | Epoch 1 | Loss: 6.2095 | Avg: 7.2234 | Elapsed: 0.0h | Rem: 5.0h | 0.2 samples/s
+  Step 20 | Epoch 1 | Loss: 6.9122 | Avg: 7.0452 | Elapsed: 0.1h | Rem: 4.9h | 0.2 samples/s
+  Step 30 | Epoch 1 | Loss: 6.9900 | Avg: 6.9200 | Elapsed: 0.2h | Rem: 4.8h | 0.2 samples/s
+  Step 40 | Epoch 1 | Loss: 6.8349 | Avg: 6.8308 | Elapsed: 0.2h | Rem: 4.8h | 0.2 samples/s
+  Step 50 | Epoch 1 | Loss: 6.5362 | Avg: 6.7031 | Elapsed: 0.3h | Rem: 4.7h | 0.2 samples/s
+  New best: 6.7031 -> ./pretrain-50m/best.pt
+  Step 60 | Epoch 1 | Loss: 6.4500 | Avg: 6.6600 | Elapsed: 0.3h | Rem: 4.7h | 0.2 samples/s
+  Step 70 | Epoch 1 | Loss: 5.9307 | Avg: 6.6246 | Elapsed: 0.4h | Rem: 4.6h | 0.2 samples/s
+  Step 80 | Epoch 1 | Loss: 6.0114 | Avg: 6.5712 | Elapsed: 0.4h | Rem: 4.6h | 0.2 samples/s
+  Step 90 | Epoch 1 | Loss: 6.3439 | Avg: 6.4951 | Elapsed: 0.5h | Rem: 4.5h | 0.2 samples/s
+  Step 100 | Epoch 1 | Loss: 6.2096 | Avg: 6.4699 | Elapsed: 0.5h | Rem: 4.5h | 0.2 samples/s
+  New best: 6.4699 -> ./pretrain-50m/best.pt
+  Step 110 | Epoch 1 | Loss: 5.9662 | Avg: 6.4627 | Elapsed: 0.6h | Rem: 4.4h | 0.2 samples/s
+  Step 120 | Epoch 1 | Loss: 6.0782 | Avg: 6.4286 | Elapsed: 0.6h | Rem: 4.4h | 0.2 samples/s
+  Step 130 | Epoch 1 | Loss: 6.6921 | Avg: 6.4290 | Elapsed: 0.7h | Rem: 4.3h | 0.2 samples/s
+  Step 140 | Epoch 1 | Loss: 6.2434 | Avg: 6.4232 | Elapsed: 0.8h | Rem: 4.2h | 0.2 samples/s
+  Step 150 | Epoch 1 | Loss: 6.6796 | Avg: 6.4002 | Elapsed: 0.8h | Rem: 4.2h | 0.2 samples/s
+  New best: 6.4002 -> ./pretrain-50m/best.pt
+  Step 160 | Epoch 1 | Loss: 6.6933 | Avg: 6.3897 | Elapsed: 0.9h | Rem: 4.1h | 0.2 samples/s
+  Step 170 | Epoch 1 | Loss: 5.7869 | Avg: 6.3555 | Elapsed: 0.9h | Rem: 4.1h | 0.2 samples/s
+  Step 180 | Epoch 1 | Loss: 5.5078 | Avg: 6.3417 | Elapsed: 1.0h | Rem: 4.0h | 0.2 samples/s
+  Step 190 | Epoch 1 | Loss: 5.7697 | Avg: 6.3144 | Elapsed: 1.0h | Rem: 4.0h | 0.2 samples/s
+  Step 200 | Epoch 1 | Loss: 6.1179 | Avg: 6.3006 | Elapsed: 1.1h | Rem: 3.9h | 0.2 samples/s
+  New best: 6.3006 -> ./pretrain-50m/best.pt
+  Step 210 | Epoch 1 | Loss: 5.5798 | Avg: 6.2829 | Elapsed: 1.1h | Rem: 3.9h | 0.2 samples/s
+  Step 220 | Epoch 1 | Loss: 6.4408 | Avg: 6.2737 | Elapsed: 1.2h | Rem: 3.8h | 0.2 samples/s
+  Step 230 | Epoch 1 | Loss: 6.0609 | Avg: 6.2623 | Elapsed: 1.3h | Rem: 3.7h | 0.2 samples/s
+  Step 240 | Epoch 1 | Loss: 5.0978 | Avg: 6.2367 | Elapsed: 1.3h | Rem: 3.7h | 0.2 samples/s
+  Step 250 | Epoch 1 | Loss: 5.8988 | Avg: 6.2223 | Elapsed: 1.4h | Rem: 3.6h | 0.2 samples/s
+  New best: 6.2223 -> ./pretrain-50m/best.pt
+  Step 260 | Epoch 1 | Loss: 5.9803 | Avg: 6.1945 | Elapsed: 1.4h | Rem: 3.6h | 0.2 samples/s
+  Step 270 | Epoch 1 | Loss: 5.8480 | Avg: 6.1823 | Elapsed: 1.5h | Rem: 3.5h | 0.2 samples/s
+  Step 280 | Epoch 1 | Loss: 5.8366 | Avg: 6.1667 | Elapsed: 1.6h | Rem: 3.4h | 0.2 samples/s
+  Step 290 | Epoch 1 | Loss: 6.2880 | Avg: 6.1595 | Elapsed: 1.6h | Rem: 3.4h | 0.2 samples/s
+  Step 300 | Epoch 1 | Loss: 5.7166 | Avg: 6.1470 | Elapsed: 1.7h | Rem: 3.3h | 0.2 samples/s
+  New best: 6.1470 -> ./pretrain-50m/best.pt
+  Step 310 | Epoch 1 | Loss: 5.7162 | Avg: 6.1343 | Elapsed: 1.7h | Rem: 3.3h | 0.2 samples/s
+  Step 320 | Epoch 1 | Loss: 5.5848 | Avg: 6.1221 | Elapsed: 1.8h | Rem: 3.2h | 0.2 samples/s
+  Step 330 | Epoch 1 | Loss: 6.0477 | Avg: 6.1120 | Elapsed: 1.9h | Rem: 3.1h | 0.2 samples/s
+  Step 340 | Epoch 1 | Loss: 5.0980 | Avg: 6.1063 | Elapsed: 1.9h | Rem: 3.1h | 0.2 samples/s
+  Step 350 | Epoch 1 | Loss: 5.8432 | Avg: 6.0955 | Elapsed: 2.0h | Rem: 3.0h | 0.2 samples/s
+  New best: 6.0955 -> ./pretrain-50m/best.pt
+  Step 360 | Epoch 1 | Loss: 5.7113 | Avg: 6.0817 | Elapsed: 2.1h | Rem: 2.9h | 0.2 samples/s
+  Step 370 | Epoch 1 | Loss: 6.1248 | Avg: 6.0775 | Elapsed: 2.1h | Rem: 2.9h | 0.2 samples/s
+  Step 380 | Epoch 1 | Loss: 6.1939 | Avg: 6.0727 | Elapsed: 2.2h | Rem: 2.8h | 0.2 samples/s
+  Step 390 | Epoch 1 | Loss: 5.9127 | Avg: 6.0585 | Elapsed: 2.3h | Rem: 2.7h | 0.2 samples/s
+  Step 400 | Epoch 1 | Loss: 5.6654 | Avg: 6.0518 | Elapsed: 2.3h | Rem: 2.7h | 0.2 samples/s
+  New best: 6.0518 -> ./pretrain-50m/best.pt
+  Step 410 | Epoch 1 | Loss: 5.9857 | Avg: 6.0418 | Elapsed: 2.4h | Rem: 2.6h | 0.2 samples/s
+  Step 420 | Epoch 1 | Loss: 5.4964 | Avg: 6.0320 | Elapsed: 2.5h | Rem: 2.5h | 0.2 samples/s
+  Step 430 | Epoch 1 | Loss: 5.7091 | Avg: 6.0239 | Elapsed: 2.5h | Rem: 2.5h | 0.2 samples/s
+  Step 440 | Epoch 1 | Loss: 5.7901 | Avg: 6.0138 | Elapsed: 2.6h | Rem: 2.4h | 0.2 samples/s
+  Step 450 | Epoch 1 | Loss: 6.2006 | Avg: 6.0077 | Elapsed: 2.7h | Rem: 2.3h | 0.2 samples/s
+  New best: 6.0077 -> ./pretrain-50m/best.pt
+  Step 460 | Epoch 1 | Loss: 5.9775 | Avg: 6.0018 | Elapsed: 2.8h | Rem: 2.2h | 0.2 samples/s
+  Step 470 | Epoch 1 | Loss: 5.6673 | Avg: 5.9957 | Elapsed: 2.8h | Rem: 2.2h | 0.2 samples/s
+  Step 480 | Epoch 1 | Loss: 5.3618 | Avg: 5.9904 | Elapsed: 2.9h | Rem: 2.1h | 0.2 samples/s
+  Step 490 | Epoch 1 | Loss: 5.8359 | Avg: 5.9823 | Elapsed: 3.0h | Rem: 2.0h | 0.2 samples/s
+  Step 500 | Epoch 1 | Loss: 5.8425 | Avg: 5.9748 | Elapsed: 3.0h | Rem: 2.0h | 0.2 samples/s
+  New best: 5.9748 -> ./pretrain-50m/best.pt
+  Step 510 | Epoch 1 | Loss: 5.2121 | Avg: 5.9644 | Elapsed: 3.1h | Rem: 1.9h | 0.2 samples/s
+  Step 520 | Epoch 1 | Loss: 5.7065 | Avg: 5.9583 | Elapsed: 3.2h | Rem: 1.8h | 0.2 samples/s
+  Step 530 | Epoch 1 | Loss: 5.6240 | Avg: 5.9510 | Elapsed: 3.3h | Rem: 1.7h | 0.2 samples/s
+  Step 540 | Epoch 1 | Loss: 5.0534 | Avg: 5.9421 | Elapsed: 3.4h | Rem: 1.6h | 0.2 samples/s
+  Step 550 | Epoch 1 | Loss: 5.3325 | Avg: 5.9308 | Elapsed: 3.4h | Rem: 1.6h | 0.2 samples/s
+  New best: 5.9308 -> ./pretrain-50m/best.pt
+  Step 560 | Epoch 1 | Loss: 5.6381 | Avg: 5.9241 | Elapsed: 3.5h | Rem: 1.5h | 0.2 samples/s
+  Step 570 | Epoch 1 | Loss: 5.4040 | Avg: 5.9172 | Elapsed: 3.6h | Rem: 1.4h | 0.2 samples/s
+  Step 580 | Epoch 1 | Loss: 5.5619 | Avg: 5.9098 | Elapsed: 3.7h | Rem: 1.3h | 0.2 samples/s
+  Step 590 | Epoch 1 | Loss: 5.1440 | Avg: 5.9042 | Elapsed: 3.8h | Rem: 1.2h | 0.2 samples/s
+  Step 600 | Epoch 1 | Loss: 5.9497 | Avg: 5.8994 | Elapsed: 3.8h | Rem: 1.2h | 0.2 samples/s
+  New best: 5.8994 -> ./pretrain-50m/best.pt
+  Step 610 | Epoch 1 | Loss: 6.0462 | Avg: 5.8937 | Elapsed: 3.9h | Rem: 1.1h | 0.2 samples/s
+  Step 620 | Epoch 1 | Loss: 5.8915 | Avg: 5.8873 | Elapsed: 4.0h | Rem: 1.0h | 0.2 samples/s
+  Step 630 | Epoch 1 | Loss: 5.4397 | Avg: 5.8815 | Elapsed: 4.1h | Rem: 0.9h | 0.2 samples/s
+  Step 640 | Epoch 1 | Loss: 5.7908 | Avg: 5.8766 | Elapsed: 4.2h | Rem: 0.8h | 0.2 samples/s
+  Step 650 | Epoch 1 | Loss: 5.6739 | Avg: 5.8671 | Elapsed: 4.3h | Rem: 0.7h | 0.2 samples/s
+  New best: 5.8671 -> ./pretrain-50m/best.pt
+  Step 660 | Epoch 1 | Loss: 4.9901 | Avg: 5.8615 | Elapsed: 4.3h | Rem: 0.7h | 0.2 samples/s
+  Step 670 | Epoch 1 | Loss: 5.2041 | Avg: 5.8544 | Elapsed: 4.4h | Rem: 0.6h | 0.2 samples/s
+  Step 680 | Epoch 1 | Loss: 5.5992 | Avg: 5.8470 | Elapsed: 4.5h | Rem: 0.5h | 0.2 samples/s
+  Step 690 | Epoch 1 | Loss: 5.6846 | Avg: 5.8438 | Elapsed: 4.6h | Rem: 0.4h | 0.2 samples/s
+  Step 700 | Epoch 1 | Loss: 5.5015 | Avg: 5.8336 | Elapsed: 4.7h | Rem: 0.3h | 0.2 samples/s
+  New best: 5.8336 -> ./pretrain-50m/best.pt
+  Step 710 | Epoch 1 | Loss: 5.6348 | Avg: 5.8286 | Elapsed: 4.8h | Rem: 0.2h | 0.2 samples/s
+  Step 720 | Epoch 1 | Loss: 5.4945 | Avg: 5.8239 | Elapsed: 4.9h | Rem: 0.1h | 0.2 samples/s
+  Step 730 | Epoch 1 | Loss: 5.7548 | Avg: 5.8206 | Elapsed: 4.9h | Rem: 0.1h | 0.2 samples/s
+
+============================================================
+Pretraining Complete!
+  Steps: 736
+  Final Loss: 5.8170
+  Best Loss: 5.8336
+  Time: 5.00h
+  Saved: ./pretrain-50m/final.pt
+
+Next: python train_simpo_50m.py --pretrained ./pretrain-50m/final.pt
+============================================================

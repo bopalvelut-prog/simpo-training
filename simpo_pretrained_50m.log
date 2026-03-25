@@ -1,0 +1,58 @@
+============================================================
+SimPO Training — 50M Parameter Model
+============================================================
+  Training time: 5.0h
+  gamma=1.0, beta=0.5, lr=0.0003
+  batch_size=4, max_len=256
+  Pretrained: ./pretrain-50m/best.pt
+
+Building tokenizer...
+  Vocab: 16384 words
+Loading UltraFeedback dataset...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loaded 10000 preference pairs
+
+Building 50M model...
+Model: 51,380,224 params (51.4M)
+Loading pretrained weights from ./pretrain-50m/best.pt
+  Loaded (pretrain loss: 5.833628145286015)
+
+Starting SimPO training for 5.0h...
+  Step 10 | Loss: 2.0731 | Avg: 2.1843 | Elapsed: 0.2h | Remaining: 4.8h | 0.1 samples/s
+  Step 20 | Loss: 2.0174 | Avg: 2.0957 | Elapsed: 0.3h | Remaining: 4.7h | 0.1 samples/s
+  Step 30 | Loss: 2.0370 | Avg: 2.1775 | Elapsed: 0.5h | Remaining: 4.5h | 0.1 samples/s
+  Step 40 | Loss: 1.6838 | Avg: 2.0968 | Elapsed: 0.7h | Remaining: 4.3h | 0.1 samples/s
+  Step 50 | Loss: 2.3108 | Avg: 2.1081 | Elapsed: 0.8h | Remaining: 4.2h | 0.1 samples/s
+  Step 60 | Loss: 1.4795 | Avg: 2.1136 | Elapsed: 1.0h | Remaining: 4.0h | 0.1 samples/s
+  Step 70 | Loss: 1.3336 | Avg: 2.1084 | Elapsed: 1.2h | Remaining: 3.8h | 0.1 samples/s
+  Step 80 | Loss: 2.9717 | Avg: 2.1029 | Elapsed: 1.4h | Remaining: 3.6h | 0.1 samples/s
+  Step 90 | Loss: 1.2524 | Avg: 2.0600 | Elapsed: 1.5h | Remaining: 3.5h | 0.1 samples/s
+  Step 100 | Loss: 0.2831 | Avg: 2.0047 | Elapsed: 1.7h | Remaining: 3.3h | 0.1 samples/s
+  Step 110 | Loss: 1.3862 | Avg: 2.0281 | Elapsed: 1.9h | Remaining: 3.1h | 0.1 samples/s
+  Step 120 | Loss: 1.5190 | Avg: 2.0108 | Elapsed: 2.0h | Remaining: 3.0h | 0.1 samples/s
+  Step 130 | Loss: 1.1235 | Avg: 1.9894 | Elapsed: 2.2h | Remaining: 2.8h | 0.1 samples/s
+  Step 140 | Loss: 2.1102 | Avg: 2.0118 | Elapsed: 2.4h | Remaining: 2.6h | 0.1 samples/s
+  Step 150 | Loss: 2.0710 | Avg: 2.0075 | Elapsed: 2.5h | Remaining: 2.5h | 0.1 samples/s
+  Step 160 | Loss: 2.3303 | Avg: 1.9921 | Elapsed: 2.7h | Remaining: 2.3h | 0.1 samples/s
+  Step 170 | Loss: 1.6303 | Avg: 2.0067 | Elapsed: 2.9h | Remaining: 2.1h | 0.1 samples/s
+  Step 180 | Loss: 2.1475 | Avg: 1.9863 | Elapsed: 3.1h | Remaining: 1.9h | 0.1 samples/s
+  Step 190 | Loss: 1.7270 | Avg: 1.9775 | Elapsed: 3.2h | Remaining: 1.8h | 0.1 samples/s
+  Step 200 | Loss: 0.6888 | Avg: 1.9595 | Elapsed: 3.4h | Remaining: 1.6h | 0.1 samples/s
+  Step 210 | Loss: 1.8991 | Avg: 1.9399 | Elapsed: 3.6h | Remaining: 1.4h | 0.1 samples/s
+  Step 220 | Loss: 2.3161 | Avg: 1.9377 | Elapsed: 3.8h | Remaining: 1.2h | 0.1 samples/s
+  Step 230 | Loss: 1.3682 | Avg: 1.9248 | Elapsed: 3.9h | Remaining: 1.1h | 0.1 samples/s
+  Step 240 | Loss: 1.4449 | Avg: 1.9298 | Elapsed: 4.1h | Remaining: 0.9h | 0.1 samples/s
+  Step 250 | Loss: 1.9312 | Avg: 1.9197 | Elapsed: 4.3h | Remaining: 0.7h | 0.1 samples/s
+  Step 260 | Loss: 2.3898 | Avg: 1.9275 | Elapsed: 4.5h | Remaining: 0.5h | 0.1 samples/s
+  Step 270 | Loss: 2.4843 | Avg: 1.9152 | Elapsed: 4.6h | Remaining: 0.4h | 0.1 samples/s
+  Step 280 | Loss: 1.9374 | Avg: 1.9111 | Elapsed: 4.8h | Remaining: 0.2h | 0.1 samples/s
+
+Time limit reached: 5.01h
+
+============================================================
+SimPO Training Complete!
+  Steps: 289
+  Final Loss: 1.9076
+  Time: 5.01h
+  Saved: ./simpo-50m/final.pt
+============================================================

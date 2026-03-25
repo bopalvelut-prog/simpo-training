@@ -4,3 +4,5 @@ __pycache__/
 .DS_Store
 simpo-50m/
 simpo-95m/
+pretrain-50m/
+simpo-50m/
